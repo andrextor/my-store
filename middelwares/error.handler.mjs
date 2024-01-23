@@ -1,6 +1,6 @@
 export const logErrors = (err, req, res, next) => {
   console.log('logErrors');
-  console.error(err)
+  //console.error(err)
   next(err);
 }
 
@@ -19,5 +19,5 @@ export const boomErrorHandler = (err, req, res, next) => {
     res.status(output.statusCode).json(output.payload)
     return;
   }
-    next(err)
+  next(err)
 }
