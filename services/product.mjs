@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker'
+import boom from '@hapi/boom'
 
 class ProductServices {
 
@@ -23,20 +24,30 @@ class ProductServices {
     return new Promise((res, rej) => {
       setTimeout(() => {
         res(this.products)
-      }, 5000)
+      }, 3000)
     })
   }
 
   async findOne(id) {
-    const name = this.getToTal();
-    return this.products.find((prod) => prod.id == id)
+    const product = this.products.find((prod) => prod.id == id)
+
+    if (!product) {
+      throw boom.notFound('Product not found');
+    }
+
+    if(product.block){
+      throw boom.conflict('Product is block');
+    }
+
+    return product
   }
 
   async update(id, data) {
 
-    if (id == 999) {
-      throw new Error('OH noooo product not found');
+    if (id == 'error') {
+      throw boom.notFound('Product not found put');
     }
+
     const index = this.products.findIndex((pro) => pro.id === id);
     const product = this.products[index];
 
@@ -68,7 +79,8 @@ class ProductServices {
         name: faker.commerce.productName(),
         price: faker.commerce.price(),
         description: faker.commerce.productDescription(),
-        image: faker.image.url()
+        image: faker.image.url(),
+        block: faker.datatype.boolean()
       });
 
     }

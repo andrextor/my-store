@@ -36,14 +36,20 @@ productRouter.post('/', async (req, res) => {
   })
 });
 
-productRouter.put('/:id', async (req, res) => {
+productRouter.put('/:id', async (req, res, next) => {
   const { id } = req.params;
-  const data = await services.update(id, req.body);
 
-  res.json({
-    message: 'update Product completed',
-    data: data,
-  })
+  try {
+    const data = await services.update(id, req.body);
+
+    res.json({
+      message: 'update Product completed',
+      data: data,
+    })
+  } catch (error) {
+    next(error)
+  }
+
 });
 
 productRouter.patch('/:id', async (req, res) => {

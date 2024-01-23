@@ -1,7 +1,7 @@
 import express from 'express';
 import chalk from 'chalk';
 import routerApi from './routes/index.mjs';
-import { logErrors, errorHandler } from './middelwares/error.handler.mjs';
+import { logErrors, errorHandler, boomErrorHandler } from './middelwares/error.handler.mjs';
 
 const app = express();
 const port = 3000;
@@ -18,6 +18,7 @@ app.get('/', (req, resp) => {
 routerApi(app);
 
 app.use(logErrors);
+app.use(boomErrorHandler);
 app.use(errorHandler);
 
 const server = app.listen(port, () => {
