@@ -21,7 +21,7 @@ const options = {
 }
 
 app.use(express.json());
-app.use(cors(options));
+app.use(cors());
 
 
 const log = console.log;
