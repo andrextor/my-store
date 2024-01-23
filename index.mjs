@@ -6,7 +6,7 @@ import cors from 'cors';
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3911;
 
 const whiteList = ['www.mi-app.com']
 const options = {
@@ -37,6 +37,5 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 const server = app.listen(port, () => {
-  const serverUrl = `http://localhost:${port}`
-  log(`Server On: ${chalk.white.underline.bold(serverUrl)}`);
+  log(`Server on port : ${chalk.white.underline.bold(port)}`);
 });
