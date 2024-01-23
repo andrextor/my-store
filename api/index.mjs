@@ -6,7 +6,7 @@ import cors from 'cors';
 
 
 const app = express();
-const port = process.env.PORT || 3911;
+const port = 3000;
 
 const whiteList = ['www.mi-app.com']
 const options = {
@@ -24,7 +24,7 @@ app.use(express.json());
 
 
 const log = console.log;
-app.get('/', (req, resp) => {
+app.get('/api', (req, resp) => {
   resp.send('Hola mi server en express');
 })
 
