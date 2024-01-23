@@ -22,9 +22,7 @@ class ProductServices {
 
   async find() {
     return new Promise((res, rej) => {
-      setTimeout(() => {
-        res(this.products)
-      }, 3000)
+      res(this.products)
     })
   }
 
@@ -35,7 +33,7 @@ class ProductServices {
       throw boom.notFound('Product not found');
     }
 
-    if(product.block){
+    if (product.block) {
       throw boom.conflict('Product is block');
     }
 
