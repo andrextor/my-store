@@ -21,7 +21,6 @@ const options = {
 }
 
 app.use(express.json());
-app.use();
 
 
 const log = console.log;
