@@ -1,5 +1,6 @@
 const boom = require('@hapi/boom');
 const pool = require('../libs/mysql.pool.js')
+const { models } = require('../libs/sequelize.js');
 
 class UserService {
   constructor() { }
@@ -10,9 +11,12 @@ class UserService {
 
   async find() {
 
-    const [results] = await pool.execute('SELECT * FROM tasks');
+    const response = await models.User.findAll();
+    // const query = 'SELECT * FROM tasks';
+    //const [results] = await pool.execute(query);
+    //const [data] = await sequelize.query(query);
 
-    return results
+    return response;
   }
   async findOne(id) {
     return { id }
