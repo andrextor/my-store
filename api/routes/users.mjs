@@ -1,21 +1,12 @@
 import express from 'express';
+import UserService from '../services/user.js';
 
 const userRouter = express.Router();
+const service = new UserService();
 
-userRouter.get('/', (req, res) => {
-
-  const { limit, offset } = req.query;
-
-  if (limit && offset) {
-    res.json({
-      limit,
-      offset
-    })
-
-    return;
-  }
-
-  res.send('Params not found');
-})
+userRouter.get('/', async (req, resp) => {
+  const products = await service.find()
+  resp.json(products);
+});
 
 export default userRouter

@@ -1,12 +1,14 @@
 services:
-    postgres:
-        image: postgres
+    mysql:
+        image: mysql
+        container_name: MYSQL
         restart: always
         ports:
-            - 5432
+            - "33060:3306"
         environment:
-            POSTGRES_DB: ${DB_NAME}
-            POSTGRES_USER: ${DB_USER}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_NAME}
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD:  ${DB_PASSWORD}
         volumes:
-            - ./postgres_data:/var/lib/postgresql/data
+            - ./dbdata:/var/lib/mysql
