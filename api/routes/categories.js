@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 
 const categoriesRouter = express.Router();
 
@@ -15,4 +15,4 @@ categoriesRouter.get('/:category_id/products/:product_id', (req, resp) => {
   });
 });
 
-export default categoriesRouter
+module.exports = categoriesRouter

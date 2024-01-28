@@ -1,7 +1,7 @@
-import express from 'express';
-import productsRouter from './products.mjs'
-import userRouter from './users.mjs'
-import categoriesRouter from './categories.mjs'
+const express = require('express')
+const productsRouter = require('./products.js')
+const userRouter = require('./users.js')
+const categoriesRouter = require('./categories.js')
 
 const routerApi = (app) => {
   const router = express.Router();
@@ -14,4 +14,4 @@ const routerApi = (app) => {
 }
 
 
-export default routerApi
+module.exports = routerApi

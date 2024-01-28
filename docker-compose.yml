@@ -11,4 +11,4 @@ services:
             MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_ROOT_PASSWORD:  ${DB_PASSWORD}
         volumes:
-            - ./dbdata:/var/lib/mysql
+            - ./dbata:/var/lib/mysql

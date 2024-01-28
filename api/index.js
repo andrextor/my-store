@@ -1,8 +1,6 @@
-import express from 'express';
-import chalk from 'chalk';
-import routerApi from './routes/index.mjs';
-import { logErrors, errorHandler, boomErrorHandler } from './middelwares/error.handler.mjs';
-import cors from 'cors';
+const express = require('express');
+const routerApi = require('./routes/index.js');
+const { logErrors, errorHandler, boomErrorHandler } = require('./middelwares/error.handler.js');
 
 
 const app = express();
@@ -36,5 +34,5 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 const server = app.listen(port, () => {
-  log(`Server on port : ${chalk.white.underline.bold(port)}`);
+  log(`Server on port : http://localhost:${port}`);
 });

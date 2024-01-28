@@ -1,5 +1,5 @@
-import express from 'express';
-import UserService from '../services/user.js';
+const express = require('express');
+const UserService = require('../services/user.js');
 
 const userRouter = express.Router();
 const service = new UserService();
@@ -9,4 +9,4 @@ userRouter.get('/', async (req, resp) => {
   resp.json(products);
 });
 
-export default userRouter
+module.exports = userRouter

@@ -1,6 +1,6 @@
-import boom from '@hapi/boom';
+const boom = require('@hapi/boom');
 
-export const validator = (schema, property) => {
+const validator = (schema, property) => {
   return (req, res, next) => {
 
     const data = req[property];
@@ -15,3 +15,5 @@ export const validator = (schema, property) => {
     next();
   }
 }
+
+module.exports = validator

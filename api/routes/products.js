@@ -1,7 +1,7 @@
-import express from 'express';
-import ProductServices from '../services/product.mjs';
-import { validator } from '../middelwares/validator.handler.mjs';
-import { getProductSchema, createProductSchema, updateProductSchema } from '../schemas/productDTO.mjs';
+const express = require('express');
+const ProductServices = require('../services/product');
+const validator = require('../middelwares/validator.handler.js');
+const { getProductSchema, createProductSchema, updateProductSchema } = require('../schemas/productDTO.js');
 
 const productRouter = express.Router();
 const services = new ProductServices();
@@ -84,4 +84,4 @@ productRouter.delete('/:id', async (req, res) => {
 });
 
 
-export default productRouter;
+module.exports = productRouter;
