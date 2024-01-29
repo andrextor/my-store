@@ -12,7 +12,9 @@ class UserService {
   }
 
   async find() {
-    const response = await models.User.findAll();
+    const response = await models.User.findAll({
+      attributes: ['id', 'email', 'role', 'created_at']
+    });
     // const query = 'SELECT * FROM tasks';
     //const [results] = await pool.execute(query);
     //const [data] = await sequelize.query(query);
@@ -25,7 +27,7 @@ class UserService {
     if (!user) {
       throw boom.notFound('user not found');
     }
-    return user
+    return user.toJSON();
   }
 
   async update(id, changes) {
