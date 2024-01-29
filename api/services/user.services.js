@@ -13,7 +13,8 @@ class UserService {
 
   async find() {
     const response = await models.User.findAll({
-      attributes: ['id', 'email', 'role', 'created_at']
+      include: ['customer'],
+      attributes: ['id', 'email', 'role', 'created_at'],
     });
     // const query = 'SELECT * FROM tasks';
     //const [results] = await pool.execute(query);
