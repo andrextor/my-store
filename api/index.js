@@ -1,6 +1,6 @@
 const express = require('express');
 const routerApi = require('./routes/index.js');
-const { logErrors, errorHandler, boomErrorHandler } = require('./middelwares/error.handler.js');
+const { ormErrorHandler, logErrors, errorHandler, boomErrorHandler } = require('./middelwares/error.handler.js');
 
 
 const app = express();
@@ -31,6 +31,7 @@ routerApi(app);
 
 app.use(logErrors);
 app.use(boomErrorHandler);
+app.use(ormErrorHandler);
 app.use(errorHandler);
 
 const server = app.listen(port, () => {
