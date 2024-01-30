@@ -21,9 +21,10 @@ class ProductServices {
   }
 
   async find() {
-    return new Promise((res, rej) => {
-      res(this.products)
-    })
+    const products = await models.Product.findAll({
+      include: ['category']
+    });
+    return products;
   }
 
   async findOne(id) {
