@@ -7,7 +7,7 @@ class ProductServices {
 
   constructor() {
     this.products = [];
-    this.getProducts();
+
   }
 
   async create(data) {
@@ -62,6 +62,9 @@ class ProductServices {
   }
 
   async delete(id) {
+
+    const product = this.findOne(id);
+    await product.destroy();
     if (id <= 1) {
       throw new Error('Product not found');
     }
@@ -69,23 +72,6 @@ class ProductServices {
     const indexProduct = this.products.findIndex((pro) => pro.id === id);
     this.products.splice(indexProduct, 1);
     return { message: 'ok' }
-  }
-
-  getProducts = (limit = 10) => {
-    const data = [];
-
-    for (let i = 1; i <= 100; i++) {
-      this.products.push({
-        id: faker.string.uuid(),
-        name: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        description: faker.commerce.productDescription(),
-        image: faker.image.url(),
-        block: faker.datatype.boolean()
-      });
-
-    }
-    return data;
   }
 }
 
