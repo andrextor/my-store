@@ -11,10 +11,10 @@ class ProductServices {
   }
 
   async create(data) {
-    const newProduct = {
-      id: faker.string.uuid(),
-      ...data
-    }
+
+    const newProduct = await models.Product.create(data, {
+      include: ['category']
+    });
 
     this.products.push(newProduct);
 
