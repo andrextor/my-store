@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+
 const config = {
   env: process.env.NODE_ENV || 'development',
   isProd: process.env.NODE_ENV === 'production',
@@ -9,7 +10,7 @@ const config = {
   dbHost: process.env.DB_HOST,
   dbPort: process.env.DB_PORT,
   dbName: process.env.DB_NAME,
-  dbUrl: process.env.DB_URL,
+  dbUrl: process.env.DB_URL ,
 }
 
 module.exports = { config };

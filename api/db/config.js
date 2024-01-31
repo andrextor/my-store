@@ -1,22 +1,12 @@
-const { config } = require('../config');
-
-let URL = '';
-
-if (config.isProd) {
-  URL = config.dbUrl;
-} else {
-  const USER = encodeURIComponent(config.dbUser);
-  const PASSWORD = encodeURIComponent(config.dbPassword);
-  URL = `mysql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
-}
+const { config } = require('./../config');
 
 module.exports = {
   development: {
-    url: URL,
-    dialect: 'mysql'
+    url: config.dbUrl,
+    dialect: 'mysql',
   },
-  producion: {
-    url: URL,
+  production: {
+    url: config.dbUrl,
     dialect: 'mysql',
     dialectOptions: {
       ssl: {
@@ -24,4 +14,4 @@ module.exports = {
       }
     }
   }
-};
+}

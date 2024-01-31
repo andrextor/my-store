@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const { config } = require('./../config/config');
+const { config } = require('./../config');
 const setupModels = require('./../db/models');
 
 const options = {
@@ -16,7 +16,16 @@ if (config.isProd) {
   }
 }
 
-const sequelize = new Sequelize(config.dbUrl, options);
+
+if (config.isProd) {
+  URL = config.dbUrl;
+} else {
+  const USER = encodeURIComponent(config.dbUser);
+  const PASSWORD = encodeURIComponent(config.dbPassword);
+  URL = `mysql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+}
+
+const sequelize = new Sequelize(URL, options);
 
 setupModels(sequelize);
 
