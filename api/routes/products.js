@@ -10,11 +10,13 @@ productRouter.get('/filters', (req, res) => {
   res.send('It`s a filter')
 });
 
-productRouter.get('/', async (req, resp) => {
-  validator(queryProductSchema, 'query')
-  const products = await services.find(req.query)
-  resp.json(products);
-});
+productRouter.get(
+  '/',
+  validator(queryProductSchema, 'query'),
+  async (req, resp) => {
+    const products = await services.find(req.query)
+    resp.json(products);
+  });
 
 productRouter.get('/:id',
   validator(getProductSchema, 'params'),
