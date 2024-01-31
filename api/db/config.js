@@ -17,6 +17,11 @@ module.exports = {
   },
   producion: {
     url: URL,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false
+      }
+    }
   }
 };
