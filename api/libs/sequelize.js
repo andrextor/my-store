@@ -1,22 +1,22 @@
 const { Sequelize } = require('sequelize');
-const { config } = require('../config');
-const setupModels = require('../db/models');
 
-let URL = '';
-if (config.isProd) {
-  URL = config.dbUrl;
-} else {
-  const USER = encodeURIComponent(config.dbUser);
-  const PASSWORD = encodeURIComponent(config.dbPassword);
-  URL = `mysql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+const { config } = require('./../config/config');
+const setupModels = require('./../db/models');
+
+const options = {
+  dialect: 'mysql',
+  logging: config.isProd ? false : true,
 }
 
-const sequelize = new Sequelize(URL, {
-  dialect: 'mysql',
-  ssl: {
-    rejectUnaunthorized: false
+if (config.isProd) {
+  options.dialectOptions = {
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
-});
+}
+
+const sequelize = new Sequelize(config.dbUrl, options);
 
 setupModels(sequelize);
 
