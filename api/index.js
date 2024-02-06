@@ -1,6 +1,7 @@
 const express = require('express');
 const routerApi = require('./routes/index.js');
 const { ormErrorHandler, logErrors, errorHandler, boomErrorHandler } = require('./middelwares/error.handler.js');
+const checkApiKey = require('./middelwares/auth.handler.js');
 
 
 const app = express();
@@ -22,9 +23,16 @@ app.use(express.json());
 
 
 const log = console.log;
+
 app.get('/api', (req, resp) => {
   resp.send('Hola mi server en express');
 })
+
+app.get('/nueva-ruta',
+  checkApiKey,
+  (req, resp) => {
+    resp.send('Hola soy una ruta autorizada');
+  })
 
 
 routerApi(app);

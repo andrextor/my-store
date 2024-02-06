@@ -1,14 +1,26 @@
 const boom = require('@hapi/boom');
 //const pool = require('../libs/mysql.pool.js')
 const { models } = require('../libs/sequelize.js');
+const bcrypt = require('bcrypt');
 
 class UserService {
   constructor() { }
 
   async create(data) {
-    const newUser = await models.User.create(data);
 
-    return newUser.toJSON();
+    const hash = await bcrypt.hash(data.password, 2);
+
+    const newUser = await models.User.create({
+      ...data,
+      password: hash
+    });
+    console.log(newUser.toJSON());
+    const { email, role } = newUser.toJSON();
+
+    return {
+      email,
+      role
+    }
   }
 
   async find() {
@@ -28,7 +40,7 @@ class UserService {
     if (!user) {
       throw boom.notFound('user not found');
     }
-    return user.toJSON();
+    return user;
   }
 
   async update(id, changes) {
@@ -40,7 +52,7 @@ class UserService {
 
 
   async delete(id) {
-    const user = this.findOne(id);
+    const user = await this.findOne(id);
     await user.destroy();
 
     return { status: '204' }
