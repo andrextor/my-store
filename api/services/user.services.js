@@ -14,13 +14,10 @@ class UserService {
       ...data,
       password: hash
     });
-    console.log(newUser.toJSON());
-    const { email, role } = newUser.toJSON();
 
-    return {
-      email,
-      role
-    }
+    delete newUser.dataValues.password;
+
+    return newUser
   }
 
   async find() {
