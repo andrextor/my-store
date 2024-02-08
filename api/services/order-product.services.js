@@ -8,7 +8,6 @@ class OrderProductService {
   }
 
   async create(data) {
-    console.log(data);
     const newOrder = await models.OrderProduct.create(data);
     return newOrder;
   }
