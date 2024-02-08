@@ -31,6 +31,18 @@ class UserService {
 
     return response;
   }
+
+  async findByEmail(email) {
+    const response = await models.User.findOne({
+      where: { email }
+    });
+    // const query = 'SELECT * FROM tasks';
+    //const [results] = await pool.execute(query);
+    //const [data] = await sequelize.query(query);
+
+    return response;
+  }
+
   async findOne(id) {
     const user = await models.User.findByPk(id);
 

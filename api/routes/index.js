@@ -5,6 +5,7 @@ const categoriesRouter = require('./categories.js')
 const customerRoutes = require('./customers.router.js')
 const orderRouter = require('./orders.router');
 const orderProductRouter = require('./order-product.router.js');
+const authRouter = require('./auth.router.js');
 
 const routerApi = (app) => {
   const router = express.Router();
@@ -16,6 +17,7 @@ const routerApi = (app) => {
   router.use('/orders', orderRouter);
   router.use('/orders-products', orderProductRouter);
   router.use('/customer', customerRoutes);
+  router.use('/auth', authRouter);
   // End Api version 1
 }
 
