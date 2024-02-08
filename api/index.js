@@ -3,7 +3,7 @@ const passport = require('passport');
 require('./utils/auth');
 const routerApi = require('./routes/index.js');
 const { ormErrorHandler, logErrors, errorHandler, boomErrorHandler } = require('./middelwares/error.handler.js');
-const checkApiKey = require('./middelwares/auth.handler.js');
+const { checkApiKey } = require('./middelwares/auth.handler.js');
 
 
 const app = express();
