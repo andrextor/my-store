@@ -34,7 +34,8 @@ class UserService {
 
   async findByEmail(email) {
     const response = await models.User.findOne({
-      where: { email }
+      where: { email },
+      include: ['customer']
     });
     // const query = 'SELECT * FROM tasks';
     //const [results] = await pool.execute(query);

@@ -1,26 +1,32 @@
-const jwt = require('jsonwebtoken');
 const express = require('express');
 const passport = require('passport')
 const router = express.Router();
-const { config } = require('../config')
+const authService = require('../services/auth.serveices');
+const authServices = new authService();
+const { recoveryEmail } = require('../schemas/user.schema');
+const validatorHandler = require('../middelwares/validator.handler')
 
 router.post('/login',
   passport.authenticate('local', { session: false }),
   async (req, res, next) => {
 
     try {
-      const user = req.user;
-      const payload = {
-        sub: user.id,
-        role: user.role
-      }
+      res.json(authServices.singToken(req.user));
 
-      const token = jwt.sign(payload, config.jwtSecret)
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-      res.json({
-        user,
-        token
-      });
+router.post('/recovery',
+  validatorHandler(recoveryEmail, 'body'),
+  async (req, res, next) => {
+    try {
+      const { email } = req.body;
+      const message = await authServices.sendMail(email)
+
+      res.status(200).json(message);
 
     } catch (error) {
       next(error);
