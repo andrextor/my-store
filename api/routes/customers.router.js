@@ -6,6 +6,7 @@ const {
   createCustomerSchema,
   getCustomerSchema,
   updateCustomerSchema,
+  createCustomerWithUserIdSchema
 } = require('../schemas/customer.schema');
 
 const customerRoutes = express.Router();
@@ -25,6 +26,19 @@ customerRoutes.post('/',
     try {
       const body = req.body;
       res.status(201).json(await service.create(body));
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+customerRoutes.post('/user',
+  validationHandler(createCustomerWithUserIdSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      console.log(body);
+      res.status(201).json(await service.createWithUser(body));
     } catch (error) {
       next(error);
     }

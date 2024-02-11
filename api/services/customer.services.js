@@ -31,13 +31,10 @@ class CustomerService {
         password: hash
       }
     };
+  }
+    async createWithUser(data) {
 
-
-    const newCustomer = await models.Customer.create(newUser, {
-      include: ['user']
-    });
-
-    delete newCustomer.dataValues.user.dataValues.password;
+    const newCustomer = await models.Customer.create(data);
 
     return newCustomer;
   }
