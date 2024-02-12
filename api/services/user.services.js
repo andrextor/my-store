@@ -1,5 +1,4 @@
 const boom = require('@hapi/boom');
-//const pool = require('../libs/mysql.pool.js')
 const { models } = require('../libs/sequelize.js');
 const bcrypt = require('bcrypt');
 
@@ -31,6 +30,19 @@ class UserService {
 
     return response;
   }
+
+  async findByEmail(email) {
+    const response = await models.User.findOne({
+      where: { email },
+      include: ['customer']
+    });
+    // const query = 'SELECT * FROM tasks';
+    //const [results] = await pool.execute(query);
+    //const [data] = await sequelize.query(query);
+
+    return response;
+  }
+
   async findOne(id) {
     const user = await models.User.findByPk(id);
 
@@ -41,7 +53,7 @@ class UserService {
   }
 
   async update(id, changes) {
-    const user = this.findOne(id);
+    const user = await this.findOne(id);
     const response = await user.update(changes);
 
     return response

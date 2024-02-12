@@ -46,7 +46,6 @@ class ProductServices {
       }
     }
 
-    console.log("options:", options)
     const products = await models.Product.findAll(options);
     return products;
   }
