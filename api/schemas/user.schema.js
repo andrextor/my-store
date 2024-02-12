@@ -4,6 +4,7 @@ const id = Joi.number().integer();
 const email = Joi.string().email();
 const password = Joi.string().min(8);
 const role = Joi.string().min(5).default('customer');
+const token = Joi.string().min(16);
 
 const createUserSchema = Joi.object({
   email: email.required(),
@@ -24,4 +25,9 @@ const recoveryEmail = Joi.object({
   email: email.required(),
 });
 
-module.exports = { createUserSchema, updateUserSchema, getUserSchema, recoveryEmail }
+const resetPassword = Joi.object({
+  token: token.required(),
+  newPassword: password.required(),
+});
+
+module.exports = { createUserSchema, updateUserSchema, getUserSchema, recoveryEmail, resetPassword }
